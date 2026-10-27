@@ -33,7 +33,7 @@ Os comandos desta skill usam `python3` e caminhos com `~`. Funcionam iguais nos 
 
 1. Rodar `python3 --version`.
 2. Se falhar ou abrir a Microsoft Store (Windows), rodar `py -3 --version`, depois `python --version`.
-3. Usar o primeiro que responder Python 3.8 ou mais novo no lugar de `python3` em todos os comandos abaixo.
+3. Usar o primeiro que responder Python 3.9 ou mais novo no lugar de `python3` em todos os comandos abaixo.
 4. Se nenhum responder: parar e pedir para instalar o Python 3 (python.org; no Windows, marcar "Add python.exe to PATH").
 
 ---
