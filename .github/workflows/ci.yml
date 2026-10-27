@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.9", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit tests (fake home with accent and space, cp1252 console)
+        run: python -m unittest discover -s tests -v
+      - name: Smoke test as Claude Code runs it (bash, installed under the real home)
+        shell: bash
+        run: |
+          PY=$(command -v python3 || command -v python)
+          mkdir -p ~/.claude/skills
+          cp -R . ~/.claude/skills/skill-creator-v2
+          "$PY" ~/.claude/skills/skill-creator-v2/scripts/analyze_skills.py --summary
+          "$PY" ~/.claude/skills/skill-creator-v2/scripts/scaffold.py --name smoke-teste --category workflow --description "Fluxo de publicação com análise e configuração" --triggers "publicar página"
+          "$PY" ~/.claude/skills/skill-creator-v2/scripts/collision_check.py --description "Fluxo de publicação com análise" --triggers "publicar página"
+          "$PY" ~/.claude/skills/skill-creator-v2/scripts/audit_skill.py --skill-path ~/.claude/skills/skill-creator-v2/ --html "$RUNNER_TEMP/relatório auditoria.html"
+          test -s "$RUNNER_TEMP/relatório auditoria.html"
+      - name: Diagnostics on failure
+        if: failure()
+        shell: bash
+        run: |
+          python --version; python -c "import sys,locale; print(sys.stdout.encoding, locale.getpreferredencoding())"
+          for t in tests/test_*.py; do python -m unittest "$t" -v || true; done

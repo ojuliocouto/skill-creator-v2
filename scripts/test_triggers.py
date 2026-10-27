@@ -15,6 +15,12 @@ import math
 import subprocess
 from pathlib import Path
 
+# Windows consoles default to cp1252; force UTF-8 so accents and symbols never crash output.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 
 def wilson_score(successes: int, total: int, z: float = 1.96) -> tuple:
     """Wilson score interval for binomial proportion (95% CI by default)."""
@@ -160,7 +166,7 @@ if __name__ == "__main__":
 
     # Load or generate eval set
     if args.eval_set:
-        eval_set = json.loads(Path(args.eval_set).read_text())
+        eval_set = json.loads(Path(args.eval_set).read_text(encoding="utf-8-sig"))
     elif args.skill_name or args.skill_topic:
         eval_set = generate_eval_set(
             args.skill_name or "",

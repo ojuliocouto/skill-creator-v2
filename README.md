@@ -62,7 +62,19 @@ Self-audit of this skill on 2026-10-27: **57/60 (PASS)**. The 3 lost points are 
 Before installing, make sure you have:
 
 - **Claude Code** (CLI, desktop app or IDE extension).
-- **Python 3.8 or later** on the `PATH` as `python3`. The scripts use the standard library only.
+- **Python 3.8 or later.** The scripts use the standard library only. On Windows, install it from python.org and tick "Add python.exe to PATH". `SKILL.md` tells Claude to fall back to `py -3` or `python` when `python3` does not exist.
+
+## Supported systems
+
+The skill runs on **macOS, Linux and Windows**, inside the Claude Code CLI or the Claude desktop app. On Windows, Claude Code runs commands in Git Bash, so `~/.claude/skills/...` paths and `cat` work the same way.
+
+The scripts handle the 3 things that usually break on Windows:
+
+- **Console encoding.** Windows consoles default to cp1252. Every script switches its output to UTF-8, so accents and symbols never crash a run.
+- **BOM.** Notepad can save `SKILL.md` and JSON files with a UTF-8 BOM. Every script reads with `utf-8-sig`.
+- **Line endings.** `.gitattributes` keeps every file in LF. The scripts also read CRLF files correctly.
+
+GitHub Actions proves this on every push: `ubuntu-latest`, `macos-latest` and `windows-latest`, each with Python 3.9 and 3.12. Each job runs the unit tests and then a smoke test that installs the skill under the real home and runs it from bash, the same way Claude Code does.
 - **No credentials, no API key, no account.** The skill only reads and writes local files. Phase 1 uses Claude Code's own WebSearch and WebFetch tools for research.
 
 ## Installation
@@ -90,6 +102,14 @@ Phase 5 contains 2 rules from the author's setup:
 
 On another machine, replace `$SCRATCHPAD` with any writable directory and open the report with any browser.
 
+## Tests
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+`tests/test_portabilidade.py` installs a copy of the skill under a fake home whose path has an accent and a space (`Usuário Teste`). It forces the console to cp1252 and feeds a `SKILL.md` saved with a BOM, CRLF line endings and an emoji. Then it runs all 6 scripts.
+
 ## Repository layout
 
 ```
@@ -97,6 +117,9 @@ skill-creator-v2/
 ├── SKILL.md
 ├── README.md
 ├── LICENSE
+├── .gitattributes
+├── .github/workflows/ci.yml
+├── tests/test_portabilidade.py
 ├── assets/audit-report.html
 ├── references/
 │   ├── commands.md

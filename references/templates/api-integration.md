@@ -1,4 +1,4 @@
-# {SKILL_NAME} — {API_NAME} Integration
+# {SKILL_NAME}: {API_NAME} Integration
 
 ## Visao Geral
 
@@ -11,7 +11,7 @@ Skill para interagir com a API {API_NAME}. Cobre: autenticacao, endpoints princi
 
 ---
 
-## STEP 1 — Validacao do Setup
+## STEP 1: Validacao do Setup
 
 ### 1.1 Verificar Config
 ```bash
@@ -32,7 +32,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/api_client.py --test
 
 ---
 
-## STEP 2 — Operacoes Principais
+## STEP 2: Operacoes Principais
 
 ### 2.1 {OPERATION_1}
 ```bash
@@ -46,7 +46,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/api_client.py --action {ACTION_2} -
 
 ---
 
-## STEP 3 — Validacao
+## STEP 3: Validacao
 
 **Checkpoint:** Verificar resposta da API:
 ```bash

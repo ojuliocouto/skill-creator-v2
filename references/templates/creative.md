@@ -1,4 +1,4 @@
-# {SKILL_NAME} — {CREATIVE_DOMAIN}
+# {SKILL_NAME}: {CREATIVE_DOMAIN}
 
 ## Visao Geral
 
@@ -11,7 +11,7 @@ Sistema de geracao de {OUTPUT_TYPE}. Transforma {INPUT_TYPE} em {OUTPUT_DESCRIPT
 
 ---
 
-## STEP 1 — Validacao do Setup
+## STEP 1: Validacao do Setup
 
 ### 1.1 Verificar Config
 ```bash
@@ -28,7 +28,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/generate.py --test
 
 ---
 
-## STEP 2 — Coleta de Inputs
+## STEP 2: Coleta de Inputs
 
 ### 2.1 Input Principal (OBRIGATORIO)
 - {INPUT_1_DESCRIPTION}
@@ -44,7 +44,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/generate.py --test
 
 ---
 
-## STEP 3 — Geracao
+## STEP 3: Geracao
 
 ### 3.1 Modo Single
 ```bash
@@ -66,7 +66,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/generate.py \
 
 ---
 
-## STEP 4 — Auditoria de Qualidade
+## STEP 4: Auditoria de Qualidade
 
 ### 4.1 Criterios
 - {CRITERION_1}: {THRESHOLD}
@@ -78,7 +78,7 @@ Se reprovar: regenerar com parametros ajustados (max 3 tentativas).
 
 ---
 
-## STEP 5 — Entrega
+## STEP 5: Entrega
 
 ### 5.1 Report
 ```bash

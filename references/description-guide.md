@@ -1,4 +1,4 @@
-# Description Guide — Como escrever descriptions que trigam corretamente
+# Description Guide: Como escrever descriptions que trigam corretamente
 
 ## Principio Core
 

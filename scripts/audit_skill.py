@@ -11,6 +11,12 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).parent))
 from extract_frontmatter import extract_frontmatter, extract_body
 
+# Windows consoles default to cp1252; force UTF-8 so accents and symbols never crash output.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 
 CRITERIA = [
     {
@@ -98,7 +104,7 @@ def audit_skill(skill_path: str) -> dict:
     script_contents = {}
     for s in scripts:
         try:
-            script_contents[s.name] = s.read_text(encoding="utf-8", errors="replace")
+            script_contents[s.name] = s.read_text(encoding="utf-8-sig", errors="replace")
         except:
             script_contents[s.name] = ""
 
@@ -229,7 +235,7 @@ def generate_html_report(audit_result: dict, output_path: str = None) -> str:
 
     html = f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skill Audit — {audit_result["skill"]}</title>
+<title>Skill Audit: {audit_result["skill"]}</title>
 <style>
   body {{ font-family: -apple-system, sans-serif; background: #0d0d1a; color: #e0e0e0; max-width: 700px; margin: 40px auto; padding: 20px; }}
   h1 {{ color: #fff; }} h2 {{ color: #a0a0c0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }}
@@ -277,7 +283,7 @@ if __name__ == "__main__":
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         status = "PASS" if result["passed"] else "FAIL"
-        print(f"[{status}] {result['skill']} — {result['total_score']}/{result['max_score']}")
+        print(f"[{status}] {result['skill']}: {result['total_score']}/{result['max_score']}")
         for c in result["criteria"]:
             icon = "OK" if c["score"] >= 7 else "!!"
             print(f"  [{icon}] {c['criterion']}: {c['score']}/10 ({c['raw']})")

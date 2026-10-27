@@ -6,10 +6,16 @@ import sys
 import json
 from pathlib import Path
 
+# Windows consoles default to cp1252; force UTF-8 so accents and symbols never crash output.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 
 def extract_frontmatter(filepath: str) -> dict:
     """Parse YAML frontmatter between --- delimiters using regex."""
-    text = Path(filepath).read_text(encoding="utf-8", errors="replace")
+    text = Path(filepath).read_text(encoding="utf-8-sig", errors="replace")
 
     match = re.match(r"^---\s*\n(.*?)\n---", text, re.DOTALL)
     if not match:
@@ -76,7 +82,7 @@ def extract_frontmatter(filepath: str) -> dict:
 
 def extract_body(filepath: str) -> str:
     """Extract everything after the frontmatter."""
-    text = Path(filepath).read_text(encoding="utf-8", errors="replace")
+    text = Path(filepath).read_text(encoding="utf-8-sig", errors="replace")
     match = re.match(r"^---\s*\n.*?\n---\s*\n?", text, re.DOTALL)
     if match:
         return text[match.end():]

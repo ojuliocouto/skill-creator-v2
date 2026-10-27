@@ -7,6 +7,12 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+# Windows consoles default to cp1252; force UTF-8 so accents and symbols never crash output.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 TEMPLATES_DIR = Path(__file__).parent.parent / "references" / "templates"
 
 CATEGORY_MAP = {
@@ -57,7 +63,7 @@ def load_template(category: str) -> str:
     cat = CATEGORY_MAP.get(category, category)
     template_file = TEMPLATES_DIR / f"{cat}.md"
     if template_file.exists():
-        return template_file.read_text(encoding="utf-8")
+        return template_file.read_text(encoding="utf-8-sig")
     return ""
 
 

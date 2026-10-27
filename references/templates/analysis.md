@@ -1,4 +1,4 @@
-# {SKILL_NAME} — {ANALYSIS_DOMAIN}
+# {SKILL_NAME}: {ANALYSIS_DOMAIN}
 
 ## Visao Geral
 
@@ -11,7 +11,7 @@ Skill de analise para {DOMAIN}. Coleta dados, processa metricas e gera relatorio
 
 ---
 
-## STEP 1 — Coleta de Dados
+## STEP 1: Coleta de Dados
 
 ### 1.1 Fonte de Dados
 {DATA_SOURCE_INSTRUCTIONS}
@@ -25,7 +25,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/analyze.py --validate --input {INPU
 
 ---
 
-## STEP 2 — Analise
+## STEP 2: Analise
 
 ### 2.1 Metricas Principais
 - {METRIC_1}: {DEFINITION}
@@ -39,7 +39,7 @@ python3 ~/.claude/skills/{SKILL_DIR}/scripts/analyze.py --input {INPUT} --output
 
 ---
 
-## STEP 3 — Relatorio
+## STEP 3: Relatorio
 
 ### 3.1 Gerar Relatorio
 ```bash

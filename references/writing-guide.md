@@ -1,4 +1,4 @@
-# Writing Guide — Best Practices para SKILL.md
+# Writing Guide: Best Practices para SKILL.md
 
 ## Estrutura Recomendada
 
@@ -7,24 +7,24 @@
 (frontmatter)
 ---
 
-# Nome da Skill — Subtitulo
+# Nome da Skill: Subtitulo
 
 ## Visao Geral
 (1-3 paragrafos: o que faz, stack, por que existe)
 
-## STEP 1 — Validacao / Setup
+## STEP 1: Validacao / Setup
 (verificar config, credenciais, dependencias)
 
-## STEP 2 — Coleta de Inputs
+## STEP 2: Coleta de Inputs
 (o que o usuario precisa fornecer)
 
-## STEP 3 — Execucao
+## STEP 3: Execucao
 (workflow principal, comandos, scripts)
 
-## STEP 4 — Validacao de Output
+## STEP 4: Validacao de Output
 (como verificar que funcionou)
 
-## STEP 5 — Entrega
+## STEP 5: Entrega
 (output final pro usuario)
 
 ## Edge Cases / Troubleshooting

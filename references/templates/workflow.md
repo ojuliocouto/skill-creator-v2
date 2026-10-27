@@ -1,4 +1,4 @@
-# {SKILL_NAME} — {WORKFLOW_DESCRIPTION}
+# {SKILL_NAME}: {WORKFLOW_DESCRIPTION}
 
 ## Visao Geral
 
@@ -17,7 +17,7 @@
 
 ---
 
-## FASE 1 — {PHASE_1_NAME}
+## FASE 1: {PHASE_1_NAME}
 
 ### 1.1 {SUBSTEP}
 {INSTRUCTIONS}
@@ -29,7 +29,7 @@
 
 ---
 
-## FASE 2 — {PHASE_2_NAME}
+## FASE 2: {PHASE_2_NAME}
 
 ### 2.1 {SUBSTEP}
 {INSTRUCTIONS}
@@ -41,7 +41,7 @@
 
 ---
 
-## FASE 3 — {PHASE_3_NAME}
+## FASE 3: {PHASE_3_NAME}
 
 ### 3.1 {SUBSTEP}
 {INSTRUCTIONS}
@@ -50,7 +50,7 @@
 
 ---
 
-## FASE 4 — Entrega
+## FASE 4: Entrega
 
 ### 4.1 Validacao Final
 - [ ] {CHECK_1}

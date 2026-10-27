@@ -9,6 +9,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from extract_frontmatter import extract_frontmatter
 
+# Windows consoles default to cp1252; force UTF-8 so accents and symbols never crash output.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 
 def extract_keywords(text: str, min_len: int = 3) -> set:
     """Extract significant keywords from text."""
@@ -118,4 +124,4 @@ if __name__ == "__main__":
                 print(f"  [{icon}] {c['skill']} ({c['severity']})")
                 if c["trigger_overlap"]:
                     print(f"       Trigger overlap: {', '.join(c['trigger_overlap'])}")
-                print(f"       Keyword overlap: {c['keyword_overlap_ratio']*100:.0f}% — {', '.join(c['keyword_overlap'][:5])}")
+                print(f"       Keyword overlap: {c['keyword_overlap_ratio']*100:.0f}%: {', '.join(c['keyword_overlap'][:5])}")

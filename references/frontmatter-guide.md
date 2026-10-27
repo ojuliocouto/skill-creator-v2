@@ -1,4 +1,4 @@
-# Frontmatter Guide — Campos SKILL.md
+# Frontmatter Guide: Campos SKILL.md
 
 ## Campos Obrigatorios
 
