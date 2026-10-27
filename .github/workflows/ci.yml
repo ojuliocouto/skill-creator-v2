@@ -19,9 +19,18 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Unit tests (fake home with accent and space, cp1252 console)
         run: python -m unittest discover -s tests -v
+      - name: README install, Windows PowerShell (exact commands from the README)
+        if: runner.os == 'Windows' && github.event_name == 'push'
+        shell: pwsh
+        run: |
+          git clone --branch "${{ github.ref_name }}" https://github.com/ojuliocouto/skill-creator-v2.git "$env:USERPROFILE\.claude\skills\skill-creator-v2"
+          py -3 "$env:USERPROFILE\.claude\skills\skill-creator-v2\scripts\audit_skill.py" --skill-path "$env:USERPROFILE\.claude\skills\skill-creator-v2"
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          if (Test-Path -LiteralPath (Join-Path $PWD '~')) { Write-Error "clone created a literal ~ folder"; exit 1 }
       - name: Smoke test as Claude Code runs it (bash, installed under the real home)
         shell: bash
         run: |
+          rm -rf ~/.claude/skills/skill-creator-v2
           PY=$(command -v python3 || command -v python)
           mkdir -p ~/.claude/skills
           cp -R . ~/.claude/skills/skill-creator-v2

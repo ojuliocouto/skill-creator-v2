@@ -79,9 +79,21 @@ GitHub Actions proves this on every push: `ubuntu-latest`, `macos-latest` and `w
 
 ## Installation
 
+**macOS and Linux (Terminal), or Windows in Git Bash:**
+
 ```bash
 git clone https://github.com/ojuliocouto/skill-creator-v2.git ~/.claude/skills/skill-creator-v2
 ```
+
+**Windows in PowerShell:**
+
+```powershell
+git clone https://github.com/ojuliocouto/skill-creator-v2.git "$env:USERPROFILE\.claude\skills\skill-creator-v2"
+```
+
+Do not use `~` in PowerShell: PowerShell does not expand it for `git`, and the clone goes to a folder named `~`.
+
+**Without git:** on the repository page, click **Code**, then **Download ZIP**. Extract the ZIP and rename the folder from `skill-creator-v2-main` to `skill-creator-v2`. Move it to `~/.claude/skills/` (on Windows: `C:\Users\<your user>\.claude\skills\`).
 
 Restart Claude Code or open a new session. The skill must live at exactly `~/.claude/skills/skill-creator-v2/`, because `SKILL.md` calls its scripts and templates by that absolute path.
 
@@ -89,6 +101,12 @@ To verify the install:
 
 ```bash
 python3 ~/.claude/skills/skill-creator-v2/scripts/audit_skill.py --skill-path ~/.claude/skills/skill-creator-v2/
+```
+
+On Windows in PowerShell:
+
+```powershell
+py -3 "$env:USERPROFILE\.claude\skills\skill-creator-v2\scripts\audit_skill.py" --skill-path "$env:USERPROFILE\.claude\skills\skill-creator-v2"
 ```
 
 The last line must read `[PASS]` with a score of 45/60 or more.
